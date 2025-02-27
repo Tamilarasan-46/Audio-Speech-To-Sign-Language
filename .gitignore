@@ -1,0 +1,17 @@
+# Ignore Conda environment
+env/
+*.yml
+*.yaml
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore log files
+*.log
+
+# Ignore SQLite database (if using Django)
+*.sqlite3
