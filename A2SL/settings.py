@@ -14,8 +14,15 @@ import os
 import dj_database_url
 import nltk
 
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
+# Ensure all necessary NLTK resources are downloaded
+nltk.download('punkt')  # Sentence tokenizer
+nltk.download('averaged_perceptron_tagger')  # POS tagging
+nltk.download('wordnet')  # WordNet for lemmatization
+nltk.download('stopwords')  # Common stopwords list
+nltk.download('omw-1.4')  # WordNet corpus
+nltk.download('maxent_ne_chunker')  # Named Entity Recognition (NER)
+nltk.download('words')  # List of words for NER
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
