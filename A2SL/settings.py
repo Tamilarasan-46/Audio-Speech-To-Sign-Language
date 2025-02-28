@@ -43,9 +43,9 @@ if not SECRET_KEY:
 DEBUG = True
 
 #ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "audio-speech-to-sign-language.onrender.com").split(",")
-ALLOWED_HOSTS = ["audio-speech-to-sign-language.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'A2SL',
 ]
 
 MIDDLEWARE = [

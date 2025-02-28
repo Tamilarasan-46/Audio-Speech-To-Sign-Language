@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 
 {% block content %}
@@ -9,8 +10,9 @@
 		<form action="" method="post" align="left">
 		{% csrf_token %}
 					<input type="text" name="sen" class="mytext" id="speechToText" placeholder="">
-					<button type="button" name="button" class="mic" onclick="record()"><img src="{% static 'mic3.png' %}" height="32px" width="38px" /></button>
-		  			&nbsp&nbsp&nbsp&nbsp
+					<button type="button" name="button" class="mic" onclick="record()">
+						<img src="https://res.cloudinary.com/dyaqkgsc8/image/upload/v1740744076/speech_to_sign_assets/pi6obkxv89p5yo4oknnu.png" height="32px" width="38px" />
+					</button>&nbsp&nbsp&nbsp&nbsp
 		  			<input type="submit" name="submit" class="submit">
 
 		</form>
@@ -23,11 +25,14 @@
 			<tr>
 				<td class="td">Key words in sentence:</td>
 				<td class="td">
-				<ul class="td" id="list" align="center">
-  					{% for word in words %}
-    				<li id="{{ i }}" style="margin-right: 8px">{{ word }}</li>
-  					{% endfor %}
-				</ul>
+								<ul class="td" id="list">
+				{% for word in words %}
+						<li data-video="{{ video_urls|get_item:word }}" style="margin-right: 8px">
+						{{ word }}
+					</li>
+				{% endfor %}
+			</ul>
+			
 			</td>
 		</tr>
 	</table></div>
@@ -42,11 +47,10 @@
   	<button onclick="makeSmall()">Small</button>
   	<button onclick="makeNormal()">Normal</button>-->
 
-
-  	<video id="videoPlayer" width="600" height="350"  preload="auto" autoplay>
-    	<source src="" type="video/mp4">
-    Your browser does not support HTML5 video.
-  	</video>
+	  <video id="videoPlayer" width="600" height="350" preload="auto" autoplay>
+		<source id="videoSource" src="" type="video/mp4">
+		Your browser does not support HTML5 video.
+	</video>
   	</div></div>
 
 
@@ -62,49 +66,39 @@
 		}
 		recognition.start();
 	 }
-	function play()
-	{
-		var videoSource = new Array();
-		var	videos = document.getElementById("list").getElementsByTagName("li");
-		var j;
-		for(j=0;j<videos.length;j++)
-		{
-			videoSource[j] = "/static/" + videos[j].innerHTML +".mp4";
-		}
+	 function play() {
+    var videos = document.querySelectorAll("#list li");
+    var videoPlayer = document.getElementById("videoPlayer");
+    var videoSource = document.getElementById("videoSource");
+    var i = 0;
 
-		var i = 0; // define i
-		var videoCount = videoSource.length;
+    function playVideo(index) {
+        if (index >= videos.length) return;  // Stop when all words/letters are done
 
-		function videoPlay(videoNum)
-		{
-			document.getElementById("list").getElementsByTagName("li")[videoNum].style.color = "#09edc7";
-			document.getElementById("list").getElementsByTagName("li")[videoNum].style.fontSize = "xx-large";
-			document.getElementById("videoPlayer").setAttribute("src", videoSource[videoNum]);
-	    	document.getElementById("videoPlayer").load();
-	    	document.getElementById("videoPlayer").play();
+        var videoUrl = videos[index].dataset.video.trim(); // Get URL
 
-		}
-		document.getElementById('videoPlayer').addEventListener('ended', myHandler, false);
-		document.getElementById("list").getElementsByTagName("li")[0].style.color = "#09edc7";
-		document.getElementById("list").getElementsByTagName("li")[0].style.fontSize = "xx-large";
+        if (videoUrl) {
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            videoPlayer.play();
 
-		videoPlay(0); // play the video
+            videos[index].style.color = "#09edc7";
+            videos[index].style.fontSize = "xx-large";
 
-		function myHandler()
-		{
-	 		document.getElementById("list").getElementsByTagName("li")[i].style.color = "#feda6a";
-			document.getElementById("list").getElementsByTagName("li")[i].style.fontSize = "20px";
-			i++;
-	    	if (i == videoCount)
-	    	{
-	       	    document.getElementById("videoPlayer").pause();
-	    	}
-	     	else
-	     	{
-	        	videoPlay(i);
-	    	}
-		}
-	}
+            videoPlayer.onended = function () {
+                videos[index].style.color = "#feda6a";
+                videos[index].style.fontSize = "20px";
+                playVideo(index + 1);  // Play next video
+            };
+        } else {
+            playVideo(index + 1);  // Skip missing videos
+        }
+    }
+
+    playVideo(0);
+}
+
+
 	/* LETS USE ONLY PLAY PAUSE BUTTON WITH 720 *420 ,IT FITS THE SCREEN
 	function makeBig() {
 	    document.getElementById("videoPlayer").width = 560;
@@ -121,13 +115,17 @@
 		document.getElementById("videoPlayer").height =280;
 	}*/
 	function playPause(){
-  		if (document.getElementById("videoPlayer").paused){
-    		play();}
-  		else{
-    		document.getElementById("videoPlayer").pause();}
-		}
+    var videoPlayer = document.getElementById("videoPlayer");
+    if (!videoPlayer.src || videoPlayer.src == window.location.href) { 
+        play();  // Start playing if no video is loaded
+    } else if (videoPlayer.paused){
+        videoPlayer.play();
+    } else {
+        videoPlayer.pause();
+    }
+}
+
 
 	</script>
-
 
 {% endblock %}

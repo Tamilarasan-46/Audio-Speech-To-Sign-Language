@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.urls import path
+from A2SL.views import media_gallery
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +28,6 @@ urlpatterns = [
     path('signup/',views.signup_view,name='signup'),
     path('animation/',views.animation_view,name='animation'),
     path('',views.home_view,name='home'),
-    path('animation/',views.animation_view,name='animation')
+    path('animation/',views.animation_view,name='animation'),
+    path("media-gallery/", media_gallery, name="media_gallery"),
 ]

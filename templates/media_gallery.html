@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery</title>
+</head>
+<body>
+    <h2>Image Gallery</h2>
+    {% for media in media_files %}
+        {% if media.file_type == "image" %}
+            <img src="{{ media.file_url }}" alt="{{ media.filename }}" width="300">
+        {% endif %}
+    {% endfor %}
+
+    <h2>Video Gallery</h2>
+    {% for media in media_files %}
+        {% if media.file_type == "video" %}
+            <video width="400" controls>
+                <source src="{{ media.file_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
