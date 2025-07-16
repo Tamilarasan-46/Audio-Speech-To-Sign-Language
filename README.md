@@ -1,30 +1,58 @@
-# Audio Speech To Sign Language Converter
+# 🎤🧏‍♂️ Audio Speech To Sign Language Converter
 
-A Web Application which takes in live audio speech recording as input, converts it into text and displays the relevant Indian Sign Language animations.
+A 🌐 web application that takes in live audio speech recording as input, converts it into text, and displays the relevant Indian Sign Language (ISL) animations.
 
-> - Front-end using HTML,CSS,JavaScript.
-> - Speech recognition using JavaScript Web speech API.
-> - Text Preprocessing using Natural Language Toolkit(NLTK).
-> - A 3D animation of a character created
->   using Blender 3D tool.
+### 🔧 Tech Stack:
+- 🎨 **Front-end**: HTML, CSS, JavaScript  
+- 🗣️ **Speech Recognition**: JavaScript Web Speech API  
+- 🧠 **Text Preprocessing**: Natural Language Toolkit (NLTK)  
+- 🕴️ **3D Animation**: Blender 3D Character Animation  
 
+---
 
+## ⚙️ Prerequisites
 
-## Prerequisites
+Ensure the following are available on your system:
 
-> - Python >= 3.7
-> - Browser supports Web Speech API
-> - Download all required packages for python script A2SL/views.py
+- 🐍 **Python** >= 3.7  
+- 🌐 **Browser** with Web Speech API support  
+- 📦 All required Python packages listed in `A2SL/views.py`
 
-## Installation Guide:
+---
 
-These instructions will get you download the project and running on your local machine for development and testing purposes.
+## 🚀 Installation Guide
 
-### Instructions
+Follow these steps to get the project up and running locally:
 
-1. Open the Downloads folder and then open the terminal.
-2. From the terminal, run the python file using the command "python manage.py runserver ####" (#### optional port number).
-3. From the terminal, it shows localhost address (looks like this "server at http://127.0.0.1:8000/") run on browser.
-4. Sign up and start exploring.
-5. Click on mic button to record speech.
-6. Speech is going to processed and respective animated outputs are shown accordingly and it also support entered text manually.
+1. 📁 Open your **Downloads** folder (or wherever you've saved the project).  
+2. 🖥️ Launch the **terminal** from this folder.  
+3. ▶️ Run the project with the command:  
+   ```bash
+   python manage.py runserver ####
+   ```  
+   *(Replace `####` with an optional port number, e.g., `8000`)*  
+4. 🌐 Open your browser and go to the address shown in terminal (e.g., `http://127.0.0.1:8000/`)  
+5. 🔐 Sign up and start exploring!  
+6. 🎙️ Click the **mic** button to begin recording your speech.  
+7. 💬 The speech is processed and relevant ISL animations are displayed. You can also manually enter text for conversion.
+
+---
+
+## 🛠️ Built With
+
+[![JavaScript](https://img.shields.io/badge/JavaScript-yellow)]() [![Python](https://img.shields.io/badge/Python-blue)]() [![Django](https://img.shields.io/badge/Django-green)]() [![NLTK](https://img.shields.io/badge/NLTK-lightgrey)]() [![Blender](https://img.shields.io/badge/Blender-orange)]() [![Cloudinary](https://img.shields.io/badge/Cloudinary-blue)]()
+
+---
+
+## 📥 Download
+
+🔽 [Click here to download the full README.md](README_full_with_icons.md)
+
+---
+
+## 📣 Contributions Welcome!
+
+If you’d like to contribute or improve this project, feel free to fork and submit a pull request.
+
+---
+
